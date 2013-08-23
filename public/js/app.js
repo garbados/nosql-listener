@@ -15023,7 +15023,8 @@ angular.module('app', [])
     url: [root, '_design/queries/_view/popular'].join('/'),
     method: 'GET',
     params: {
-      group: true
+      group: true,
+      stale: 'ok'
     }
   })
   .success(function(queryRes){
@@ -15067,7 +15068,8 @@ angular.module('app', [])
     url: [root, '_design/queries/_view/trending'].join('/'),
     method: 'GET',
     params: {
-      group: true
+      group: true,
+      stale: 'ok'
     }
   })
   .success(function(res){

@@ -35,11 +35,10 @@ ddoc = {
       map: function(doc){
         if(doc.type === 'tweet') {
           var date = new Date(doc.created_at);
-          if(doc.retweet_count){
-            emit([date.getYear(), date.getMonth(), date.getDate(), String(doc._id)], doc.retweet_count);
-          }
           if(doc.retweeted_id){
             emit([date.getYear(), date.getMonth(), date.getDate(), doc.retweeted_id], 1);
+          }else{
+            emit([date.getYear(), date.getMonth(), date.getDate(), String(doc._id)], 1);
           }
         }
       },
