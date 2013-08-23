@@ -1,0 +1,15 @@
+.row(ng-repeat="tweet in tweets")
+  .col-md-2 
+    a(href="http://twitter.com/{{ tweet.user.handle }}/status/{{ tweet._id }}", target="_blank")
+      ul.pull-right.list-unstyled
+        li {{ tweet.created_at | date:'y/M/d' }}
+        li {{ tweet.created_at | date:'hh:mm a' }}
+        li(ng-show="tweet.retweet_count")
+          strong +{{ tweet.retweet_count }}
+  .col-md-10
+    blockquote
+      p(ng-bind-html-unsafe="tweet | mdify | markdown")
+      small
+        a(href="{{ tweet.user.url }}", target="_blank") {{ tweet.user.name }} 
+        span | 
+        a(href="http://twitter.com/{{ tweet.user.handle }}", target="_blank") {{ tweet.user.handle }}

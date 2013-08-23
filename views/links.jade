@@ -1,0 +1,7 @@
+.row
+  .col-md-11.col-md-offset-1
+    h1 Most shared content from today
+    ul.list-unstyled
+      li(ng-repeat="item in data")
+        span.badge {{ item.value }}
+        a.col-md-offset-1(href="{{ item.key[item.key.length-1] }}", target="_blank") {{ item.key[item.key.length-1] }} 

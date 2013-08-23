@@ -1,0 +1,7 @@
+form.form-horizontal(ng-submit="search()")
+  fieldset.col-md-offset-2
+    .form-group.col-md-8
+      input.form-control(type="text", ng-model="query", placeholder="What do you want to find?")
+    .form-group.col-md-2
+      input.btn.btn-primary(type="submit", value="Search")
+include tweets
