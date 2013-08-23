@@ -15028,7 +15028,12 @@ angular.module('app', [])
     }
   })
   .success(function(queryRes){
-    var ids = queryRes.rows.map(function(row){
+    var ids = queryRes.rows
+    .sort(function(a, b){
+      return b.value - a.value;
+    })
+    .slice(1,20)
+    .map(function(row){
       return row.key[3];
     });
     $http({
