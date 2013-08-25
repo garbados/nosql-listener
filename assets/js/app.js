@@ -70,6 +70,7 @@ angular.module('app', [])
   };
 }])
 .controller('PopularCtrl', ['$scope', '$http', 'root', function($scope, $http, root){
+  var now = new Date();
   $http({
     url: [root, '_design/queries/_view/popular'].join('/'),
     method: 'GET',
@@ -80,24 +81,26 @@ angular.module('app', [])
   })
   .success(function(queryRes){
     var ids = queryRes.rows
-    .sort(function(a, b){
-      return b.value - a.value;
+    .filter(function(row){
+      // get only the tweets from today
+      return (row.key[0] === now.getYear()) && (row.key[1] === now.getMonth()) && (row.key[2] === now.getDate());
     })
-    .slice(1,20)
     .map(function(row){
       return row.key[3];
     });
+    console.log(ids);
     $http({
       url: [root, '_all_docs'].join('/'),
-      method: 'GET',
+      method: 'POST',
       params: {
-        keys: ids,
         include_docs: true
+      },
+      data: {
+        keys: ids
       }
     })
     .success(function(allDocs){
-      var now = new Date(),
-          getScore = function(doc){
+      var getScore = function(doc){
             return (Math.pow(doc.retweet_count, 2)) / (now.getTime() - doc.created_at.getTime());
           },
           popular = allDocs.rows

@@ -53,12 +53,16 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-couchapp');
 
   // Default task(s).
-  grunt.registerTask('default', [
+  grunt.registerTask('build', [
     'jshint'
   , 'concat'
   , 'uglify'
   , 'cssmin'
-  , 'couchapp'
+  ]);
+
+  grunt.registerTask('default', [
+    'build',
+    'couchapp'
   ]);
 
 };

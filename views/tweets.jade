@@ -1,3 +1,4 @@
+h1(ng-hide="tweets", style="text-align: center;") Loading...
 .row(ng-repeat="tweet in tweets")
   .col-md-2 
     a(href="http://twitter.com/{{ tweet.user.handle }}/status/{{ tweet._id }}", target="_blank")

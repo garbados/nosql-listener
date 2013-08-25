@@ -19,7 +19,6 @@ var T = new Twit({
 var stream = T.stream('statuses/filter', {track: "nosql,cloudant,mongodb,couchdb,hbase,couchbase"})
 
 stream.on('tweet', function(tweet){
-  console.log(tweet.retweeted_status);
   var to_save = {
     _id: tweet.id_str,
     text: tweet.text,
