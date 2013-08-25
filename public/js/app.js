@@ -14986,7 +14986,8 @@ angular.module('app', [])
       limit: 100,
       descending: true
     }
-  }).success(function(res){
+  })
+  .success(function(res){
     $scope.tweets = res.rows
       .filter(function(row){
         return row.doc && row.doc.created_at;
@@ -14998,6 +14999,7 @@ angular.module('app', [])
   });
 }])
 .controller('SearchCtrl', ['$scope', '$http', 'root', function($scope, $http, root){
+  $scope.tweets = [];
   $scope.search = function(){
     $http({
       url: [root, '_design/queries/_search/text'].join('/'),
@@ -15037,7 +15039,6 @@ angular.module('app', [])
     .map(function(row){
       return row.key[3];
     });
-    console.log(ids);
     $http({
       url: [root, '_all_docs'].join('/'),
       method: 'POST',
