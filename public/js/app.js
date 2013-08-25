@@ -15031,6 +15031,7 @@ angular.module('app', [])
   .success(function(queryRes){
     var ids = queryRes.rows
     .filter(function(row){
+      // get only the tweets from today
       return (row.key[0] === now.getYear()) && (row.key[1] === now.getMonth()) && (row.key[2] === now.getDate());
     })
     .map(function(row){
@@ -15086,9 +15087,8 @@ angular.module('app', [])
     })
     .filter(function(row){
       var then = new Date(1900 + row.key[0], row.key[1], row.key[2]);
-      return (then.getYear() === now.getYear() && then.getMonth() === now.getMonth() && then.getDay() === now.getDay());
+      return (then.getYear() === now.getYear() && then.getMonth() === now.getMonth() && then.getDate() === now.getDate());
     });
-    $scope.today = now;
     $scope.data = trending;
   });
 }])

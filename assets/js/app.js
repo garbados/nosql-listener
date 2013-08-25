@@ -138,9 +138,8 @@ angular.module('app', [])
     })
     .filter(function(row){
       var then = new Date(1900 + row.key[0], row.key[1], row.key[2]);
-      return (then.getYear() === now.getYear() && then.getMonth() === now.getMonth() && then.getDay() === now.getDay());
+      return (then.getYear() === now.getYear() && then.getMonth() === now.getMonth() && then.getDate() === now.getDate());
     });
-    $scope.today = now;
     $scope.data = trending;
   });
 }])
