@@ -84,12 +84,17 @@ angular.module('app', [])
   .success(function(queryRes){
     var ids = queryRes.rows
     .filter(function(row){
-      // get only the tweets from today
-      return (row.key[0] === now.getYear()) && (row.key[1] === now.getMonth()) && (row.key[2] === now.getDate());
+      if((row.key[0] === now.getYear()) && (row.key[1] === now.getMonth()) && (row.key[2] === now.getDate())){
+        return true;
+      }
+    })
+    .sort(function(a, b){
+      return b.value - a.value;
     })
     .map(function(row){
       return row.key[3];
-    });
+    })
+    .slice(1,20);
     $http({
       url: [root, '_all_docs'].join('/'),
       method: 'POST',
@@ -117,8 +122,7 @@ angular.module('app', [])
             })
             .sort(function(a, b){
               return getScore(b) - getScore(a);
-            })
-            .slice(0,100);
+            });
       $scope.tweets = popular;
     });
   });
