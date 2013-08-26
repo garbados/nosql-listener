@@ -138,12 +138,14 @@ angular.module('app', [])
   })
   .success(function(res){
     var now = new Date();
-    var trending = res.rows.sort(function(a, b){
-      return b.value - a.value;
-    })
+    var trending = res.rows
     .filter(function(row){
-      var then = new Date(1900 + row.key[0], row.key[1], row.key[2]);
-      return (then.getYear() === now.getYear() && then.getMonth() === now.getMonth() && then.getDate() === now.getDate());
+      if((row.key[0] === now.getYear()) && (row.key[1] === now.getMonth()) && (row.key[2] === now.getDate())){
+        return true;
+      }
+    })
+    .sort(function(a, b){
+      return b.value - a.value;
     });
     $scope.data = trending;
   });
