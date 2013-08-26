@@ -15103,7 +15103,7 @@ angular.module('app', [])
 .filter('mdify', function(){
   return function(input){
     if(input){
-      return input.text.replace(/http:\/\/t\.co\/[\w\d]+/, function(str){
+      return input.text.replace(/https?:\/\/t\.co\/[\w\d]+/, function(str){
         var link = input.urls.filter(function(row){
           return str === row.url;
         })[0];
