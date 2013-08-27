@@ -29,6 +29,8 @@ Now, let's configure the app. NoSQL-Listener is built to run on Heroku, so we'll
     TOPICS=comma,separated,list,of,topics,to,watch
     TITLE=Listener Title, Displayed In Big Letters On Page
 
+To get those Twitter app credentials, register your app [here](https://dev.twitter.com/apps/new).
+
 Finally, we build our static assets, upload our design docs, and run it locally:
 
     foreman run grunt
