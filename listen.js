@@ -1,6 +1,6 @@
 var Twit = require('twit'),
     nano = require('nano')("https://" + process.env.USERNAME + ":" + process.env.PASSWORD + "@" + process.env.USERNAME + ".cloudant.com"),
-    db = nano.use(process.env.LISTEN_DB);
+    db = nano.use('nosql-listener');
 
 var T = new Twit({
     consumer_key: process.env.CONSUMER_KEY,
