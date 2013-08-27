@@ -7,16 +7,16 @@ var Twit = require('twit')
             + process.env.USERNAME
             + ".cloudant.com"
     )
-  , db = nano.use('nosql-listener')
+  , db = nano.use(process.env.LISTEN_DB)
 
 var T = new Twit({
-    consumer_key: process.env.CONSUMER_KEY
-  , consumer_secret: process.env.CONSUMER_SECRET
-  , access_token: process.env.ACCESS_TOKEN
-  , access_token_secret: process.env.ACCESS_SECRET
-})
+    consumer_key: process.env.CONSUMER_KEY,
+    consumer_secret: process.env.CONSUMER_SECRET,
+    access_token: process.env.ACCESS_TOKEN,
+    access_token_secret: process.env.ACCESS_SECRET
+});
 
-var stream = T.stream('statuses/filter', {track: "nosql,cloudant,mongodb,couchdb,hbase,couchbase"})
+var stream = T.stream('statuses/filter', {track: process.env.TOPICS})
 
 stream.on('tweet', function(tweet){
   var to_save = {
@@ -36,9 +36,9 @@ stream.on('tweet', function(tweet){
   };
   db.insert(to_save, tweet.id_str, function(err, body){
     if(err || (body && !body.ok)){
-      console.log(err, body)
+      console.log(err, body);
     }else{
-      console.log(body.id, to_save.created_at, body.ok)
+      console.log(body.id, to_save.created_at, body.ok);
     }
-  })
-})
+  });
+});
