@@ -44,4 +44,4 @@ BONUS ROUND: To upload your listener to Heroku, do this:
 
 Now you're live on Heroku!
 
-NB: to prevent your Heroku instance from idling, you'll need more than one dyno running.
+NB: to prevent your Heroku instance from idling, you'll need more than one dyno running. To do that, run `heroku ps:scale web=2`
