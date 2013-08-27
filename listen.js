@@ -1,13 +1,6 @@
-var Twit = require('twit')
-  , nano = require('nano')("https://"
-            + process.env.USERNAME
-            + ":"
-            + process.env.PASSWORD
-            + "@"
-            + process.env.USERNAME
-            + ".cloudant.com"
-    )
-  , db = nano.use(process.env.LISTEN_DB)
+var Twit = require('twit'),
+    nano = require('nano')("https://" + process.env.USERNAME + ":" + process.env.PASSWORD + "@" + process.env.USERNAME + ".cloudant.com"),
+    db = nano.use(process.env.LISTEN_DB);
 
 var T = new Twit({
     consumer_key: process.env.CONSUMER_KEY,
@@ -16,7 +9,7 @@ var T = new Twit({
     access_token_secret: process.env.ACCESS_SECRET
 });
 
-var stream = T.stream('statuses/filter', {track: process.env.TOPICS})
+var stream = T.stream('statuses/filter', {track: process.env.TOPICS});
 
 stream.on('tweet', function(tweet){
   var to_save = {
