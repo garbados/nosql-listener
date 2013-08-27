@@ -8,9 +8,9 @@ See it live at [http://nosql-listener.herokuapp.com](http://nosql-listener.herok
 
 ## Roll your Own
 
-NoSQL-Listener can be modified to aggregate news about any array of topics. To do that, you'll need [Heroku's toolbelt](https://devcenter.heroku.com/articles/quickstart#step-2-install-the-heroku-toolbelt). Once you have that installed, read on!
+NoSQL-Listener can be modified to aggregate news about any array of topics. To do that, you'll need [Heroku's toolbelt](https://devcenter.heroku.com/articles/quickstart#step-2-install-the-heroku-toolbelt), and a database in your account named `nosql-listener`. Once you have all that, read on!
 
-Now then, let's clone the project and download our dependencies:
+First off, let's clone the project and download our dependencies:
 
     git clone git@github.com:garbados/nosql-listener.git
     cd nosql-listener
@@ -29,12 +29,12 @@ Now, let's configure the app. NoSQL-Listener is built to run on Heroku, so we'll
     TOPICS=comma,separated,list,of,topics,to,watch
     TITLE=Listener Title, Displayed In Big Letters On Page
 
-Now we can build our static assets, upload our design docs, and run it locally:
+Finally, we build our static assets, upload our design docs, and run it locally:
 
     foreman run grunt
     foreman start
 
-To upload your listener to Heroku, do this:
+BONUS ROUND: To upload your listener to Heroku, do this:
 
     heroku create
     heroku config:push
