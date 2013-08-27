@@ -9,15 +9,19 @@ var fs = require('fs'),
 
 // map paths and dbs to the object we'll pass to grunt-couchapp
 for(var i in paths){
-  // strip '.js' from the path
-  var db = paths[i].replace(/\.js/, '');
-  // NB: this pattern implies one design doc per database
-  couchapps[db] = {
-    // database to which the design doc will be pushed
-    db: [admin_url, db].join('/'),
-    // where the design doc lives
-    app: path.join('ddocs', paths[i])
-  };
+  // only push design docs that are fleshed out, so not the example
+  var ddoc = require(path.join(__dirname, paths[i]));
+  if(ddoc._id){
+    // strip '.js' from the path
+    var db = paths[i].replace(/\.js/, '');
+    // NB: this pattern implies one design doc per database
+    couchapps[db] = {
+      // database to which the design doc will be pushed
+      db: [admin_url, db].join('/'),
+      // where the design doc lives
+      app: path.join('ddocs', paths[i])
+    };
+  }
 }
 
 module.exports = couchapps;
